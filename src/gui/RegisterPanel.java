@@ -6,6 +6,7 @@
 
 package gui;
 
+import cryptohelper.Studente;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import model.DBController;
 
 
 
@@ -26,6 +28,8 @@ import javax.swing.JTextField;
 public class RegisterPanel extends JPanel{
     
     private JPanel registerPanel;
+    private JPanel registerInfoPanel;
+    private JLabel registerInfoLabel;
     private JPanel registerNickPanel;
     private JLabel registerNickLabel;
     private JTextField registerNickTField;
@@ -46,6 +50,8 @@ public class RegisterPanel extends JPanel{
     public RegisterPanel(JPanel contentPanel){
         
         registerPanel = new JPanel();
+        registerInfoPanel = new JPanel();
+        registerInfoLabel = new JLabel("");
         registerNickPanel = new JPanel();
         registerNickLabel = new JLabel("Inserisci il tuo Username");
         registerNickTField = new JTextField(16);
@@ -62,7 +68,13 @@ public class RegisterPanel extends JPanel{
         registerSurnameLabel = new JLabel("Inserisci il tuo cognome");
         registerSurnameTField = new JTextField(16);
         registerButton = new JButton("Registrati");
-        registerPanel.setLayout(new GridLayout(6,1));
+        
+        registerButton.addActionListener(new RegisterAction(contentPanel));
+        
+        registerPanel.setLayout(new GridLayout(7,1));
+        registerInfoPanel.add(registerInfoLabel);
+        registerPanel.add(registerInfoPanel);
+        
         registerNickPanel.add(registerNickLabel);
         registerNickPanel.add(registerNickTField);
         registerPanel.add(registerNickPanel);
@@ -86,14 +98,35 @@ public class RegisterPanel extends JPanel{
         
         contentPanel.add(registerPanel, BorderLayout.CENTER);
         contentPanel.validate();
-        System.out.println("e qui ci arriva!!");
     }
     
     private class RegisterAction implements ActionListener{
-
+        
+        private JPanel contentPanel;
+        
+        public RegisterAction(JPanel cp){
+            contentPanel = cp;
+        }
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            String user = registerNickTField.getText();
+            String pwd = registerPwdTField.getText();
+            String rePwd = registerAgainPwdTField.getText();
+            String nome = registerNameTField.getText();
+            String cognome = registerSurnameTField.getText();
+            if(user.equals("") || pwd.equals("") || rePwd.equals("") || nome.equals("") || cognome.equals(""))
+                registerInfoLabel.setText("ERRORE, Almeno uno dei campi vuoto");
+            else if(!pwd.equals(rePwd))
+                registerInfoLabel.setText("ERRORE, Le due PassWord non coincidono");
+            else{
+                Studente st = DBController.inserisciStudente(user, pwd, nome, cognome);
+                if(st == null)
+                    registerInfoLabel.setText("ERRORE, Username o PassWord errati");
+                        else{
+                            contentPanel.remove(registerPanel);
+                            new HomePanel(contentPanel, st);
+                        }
+            }
         }
         
     }

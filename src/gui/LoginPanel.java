@@ -41,9 +41,9 @@ public class LoginPanel extends JPanel {
     public LoginPanel(JPanel contentPanel){
         loginPanel = new JPanel();
         loginNickPanel = new JPanel();
-        loginNickLabel = new JLabel("Inserisci il tuo Username");
         loginInfoPanel = new JPanel();
         loginInfoLabel = new JLabel("");
+        loginNickLabel = new JLabel("Inserisci il tuo Username");
         loginNickTField = new JTextField(16);
         loginPwdPanel = new JPanel();
         loginPwdLabel = new JLabel("Inserisci la tua Password");
@@ -55,6 +55,7 @@ public class LoginPanel extends JPanel {
         loginPanel.setLayout(new GridLayout(5,1));
         loginInfoPanel.add(loginInfoLabel);
         loginPanel.add(loginInfoPanel);
+        
         loginNickPanel.add(loginNickLabel);
         loginNickPanel.add(loginNickTField);
         loginPanel.add(loginNickPanel);
@@ -77,6 +78,7 @@ public class LoginPanel extends JPanel {
     private class LoginAction implements ActionListener{
         
         private JPanel contentPanel;
+        
         public LoginAction(JPanel cp){
             contentPanel = cp;
         }
@@ -94,7 +96,7 @@ public class LoginPanel extends JPanel {
                             loginInfoLabel.setText("ERRORE, Username o PassWord errati");
                         else{
                             contentPanel.remove(loginPanel);
-                            new RegisterPanel(contentPanel); //provvisorio dovrà poi andare in un altra pagina, passandogli anche lo studente che abbiamo ottenuto
+                            new HomePanel(contentPanel, st);
                         }
                     }
             }
