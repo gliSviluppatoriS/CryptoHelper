@@ -6,6 +6,7 @@
 
 package gui;
 
+import cryptohelper.Studente;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.DBController;
 
 /**
  *
@@ -23,6 +25,8 @@ import javax.swing.JTextField;
 public class LoginPanel extends JPanel {
     
     private JPanel loginPanel;
+    private JPanel loginInfoPanel;
+    private JLabel loginInfoLabel;
     private JPanel loginNickPanel;
     private JLabel loginNickLabel;
     private JTextField loginNickTField;
@@ -38,6 +42,8 @@ public class LoginPanel extends JPanel {
         loginPanel = new JPanel();
         loginNickPanel = new JPanel();
         loginNickLabel = new JLabel("Inserisci il tuo Username");
+        loginInfoPanel = new JPanel();
+        loginInfoLabel = new JLabel("");
         loginNickTField = new JTextField(16);
         loginPwdPanel = new JPanel();
         loginPwdLabel = new JLabel("Inserisci la tua Password");
@@ -46,7 +52,9 @@ public class LoginPanel extends JPanel {
         loginButton = new JButton("Login");
         loginRegistratiPanel = new JPanel();
         loginRegistratiButton = new JButton("Registrati");
-        loginPanel.setLayout(new GridLayout(4,1));
+        loginPanel.setLayout(new GridLayout(5,1));
+        loginInfoPanel.add(loginInfoLabel);
+        loginPanel.add(loginInfoPanel);
         loginNickPanel.add(loginNickLabel);
         loginNickPanel.add(loginNickTField);
         loginPanel.add(loginNickPanel);
@@ -76,14 +84,23 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
             if (command.equals("Login")){
-                
+                    String user = loginNickTField.getText();
+                    String pwd = loginPwdTField.getText();
+                    if(user.equals("") || pwd.equals(""))
+                        loginInfoLabel.setText("ERRORE, Username o PassWord mancanti");
+                    else{
+                        Studente st = DBController.analizeLogin(user, pwd);
+                        if(st == null)
+                            loginInfoLabel.setText("ERRORE, Username o PassWord errati");
+                        else{
+                            contentPanel.remove(loginPanel);
+                            new RegisterPanel(contentPanel); //provvisorio dovrà poi andare in un altra pagina, passandogli anche lo studente che abbiamo ottenuto
+                        }
+                    }
             }
             if (command.equals("Registrati")){
-                //contentPanel.invalidate();
                 contentPanel.remove(loginPanel);
-                
                 new RegisterPanel(contentPanel);   
-                    
             }
         }
         
