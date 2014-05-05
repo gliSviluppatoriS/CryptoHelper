@@ -23,10 +23,10 @@ public class Mappatura {
     }
     
     public char map(char c){
-        
+        return c;
     }
     
     public char inversMap(char c){
-        
+        return c;
     }
 }
