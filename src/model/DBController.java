@@ -89,10 +89,82 @@ public class DBController {
  
     }
     
+    public static void creaTabellaDestinatario() throws SQLException { //Se non catturo eccezione devo fare throw
+        Connection conn = DriverManager.getConnection(DBurl,  DBuser,  DBpwd);
+        Statement st = conn.createStatement();
+        try {
+            st.execute("DROP TABLE DESTINATARIO"); //Rimuovo da DB la tabella se esiste già
+        } catch (SQLException e){
+            System.out.println(e.getMessage() + ": no problem");
+        }
+        st.executeUpdate("CREATE TABLE DESTINATARIO" +  //creo la tabella
+                "(IDDESTINATARIO INTEGER NOT NULL," +
+                "IDMESSAGGIO INTEGER NOT NULL, " + 
+                "PRIMARY KEY(IDDESTINATARIO,IDMESSAGGIO))"
+                );
+        
+        st.close();//chiudo statement (non serve più)
+        conn.close(); //chiusura connessione
+        System.out.println("Table DESTINATARIO creata.");
+ 
+    }
+    
+    public static void creaTabellaMittente() throws SQLException { //Se non catturo eccezione devo fare throw
+        Connection conn = DriverManager.getConnection(DBurl,  DBuser,  DBpwd);
+        Statement st = conn.createStatement();
+        try {
+            st.execute("DROP TABLE MITTENTE"); //Rimuovo da DB la tabella se esiste già
+        } catch (SQLException e){
+            System.out.println(e.getMessage() + ": no problem");
+        }
+        st.executeUpdate("CREATE TABLE MITTENTE" +  //creo la tabella
+                "(IDMITTENTE INTEGER NOT NULL," +
+                "IDMESSAGGIO INTEGER NOT NULL, " + 
+                "PRIMARY KEY(IDMITTENTE,IDMESSAGGIO))"
+                );
+        
+        st.close();//chiudo statement (non serve più)
+        conn.close(); //chiusura connessione
+        System.out.println("Table MITTENTE creata.");
+ 
+    }
+    
+    public static void creaTabellaMessaggio() throws SQLException { //Se non catturo eccezione devo fare throw
+        Connection conn = DriverManager.getConnection(DBurl,  DBuser,  DBpwd);
+        Statement st = conn.createStatement();
+        try {
+            st.execute("DROP TABLE MESSAGGIO"); //Rimuovo da DB la tabella se esiste già
+        } catch (SQLException e){
+            System.out.println(e.getMessage() + ": no problem");
+        }
+        st.executeUpdate("CREATE TABLE MESSAGGIO" +  //creo la tabella
+                "(IDMESSAGGIO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY, " +
+                "TESTOMSG VARCHAR(500) NOT NULL, " + 
+                "TESTOCIFRATO VARCHAR(500) NOT NULL, "  +
+                "LINGUAMSG VARCHAR(30) NOT NULL, "  +
+                "TITOLOMSG VARCHAR(50) NOT NULL, "  + 
+                "BOZZAMSG VARCHAR(500) NOT NULL)"
+                );
+        
+        st.close();//chiudo statement (non serve più)
+        conn.close(); //chiusura connessione
+        System.out.println("Table MESSAGGIO creata.");
+ 
+    }
+    
     public static void main(String[] args) {    
        
+//        try { // creazione tabella UTENTI in DB
+//            creaTabellaStudente();
+//        } catch (SQLException e) {System.out.println(e.getMessage());}
         try { // creazione tabella UTENTI in DB
-            creaTabellaStudente();
+            creaTabellaMessaggio();
+        } catch (SQLException e) {System.out.println(e.getMessage());}
+        try { // creazione tabella UTENTI in DB
+            creaTabellaDestinatario();
+        } catch (SQLException e) {System.out.println(e.getMessage());}
+        try { // creazione tabella UTENTI in DB
+            creaTabellaMittente();
         } catch (SQLException e) {System.out.println(e.getMessage());}
     }
 }
