@@ -50,31 +50,13 @@ public class DBController {
         try{
             Connection conn = DriverManager.getConnection( DBurl,  DBuser,  DBpwd);
             Statement st= conn.createStatement();
-            Random generatore = new Random();
-            int id_stud = 0;
-            int temp; //temp per confrontare i random gia in tabella con quello nuovo
-            boolean isInTable=false; //per testare se il numero generato e gia in tabella
-            boolean ricontrolla=true; //per ricontrollare se io numero assegnato e in tabella
-            ResultSet rs = st.executeQuery("SELECT ID FROM STUDENTE");
 
-            while(ricontrolla) {//finche genero un nuovo random devo controllare se e gia in tabella
-                id_stud = generatore.nextInt(1000); //generazione numero random
-                while(rs.next() && isInTable != true) {
-                    temp = rs.getInt("ID");
-                    if(temp==id_stud) //se il numero generato era gia in tabella
-                        isInTable=true;
-                }
-                if(isInTable != true || id_stud!=0)
-                    ricontrolla=false;
-                else{
-                    isInTable=false;
-                    rs.beforeFirst();
-                }
-            }
             System.out.println("Sto inserendo uno studente nel DB..");
-            String dati = "('"+id_stud+"','"+user+"','"+pwd+"','"+nome+"','"+cognome+"')";
+            String dati = "('"+user+"','"+pwd+"','"+nome+"','"+cognome+"')";
             System.out.println(dati);
-            st.executeUpdate("INSERT INTO STUDENTE (ID,LOGIN,PWD,NOME,COGNOME) VALUES "+ dati);
+            st.executeUpdate("INSERT INTO STUDENTE (LOGIN,PWD,NOME,COGNOME) VALUES "+ dati);
+            ResultSet rs = st.executeQuery("SELECT ID FROM STUDENTE WHERE LOGIN ='"+user+"'");
+            int id_stud=rs.getInt("ID");
             st.close();
             conn.close();
             System.out.println("Ho caricato: " + dati);
@@ -92,12 +74,11 @@ public class DBController {
             System.out.println(e.getMessage() + ": no problem");
         }
         st.executeUpdate("CREATE TABLE STUDENTE" +  //creo la tabella
-                "(ID VARCHAR(30) NOT NULL, " +
-                "LOGIN VARCHAR(30) NOT NULL, " + 
+                "(ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY, " +
+                "LOGIN VARCHAR(30) NOT NULL UNIQUE, " + 
                 "PWD VARCHAR(30) NOT NULL, "  +
                 "NOME VARCHAR(30) NOT NULL, "  +
-                "COGNOME VARCHAR(30) NOT NULL, "  +
-                "PRIMARY KEY(ID,LOGIN), "
+                "COGNOME VARCHAR(30) NOT NULL)"
                 );
         
         st.close();//chiudo statement (non serve più)
