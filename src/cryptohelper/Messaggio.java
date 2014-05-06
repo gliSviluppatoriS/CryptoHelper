@@ -14,7 +14,7 @@ import java.util.Vector;
  * @author lorenzo
  */
 public class Messaggio {
-    private String id;
+    private int id;
     private String testo;
     private String testoCifrato;
     private String lingua;
@@ -28,7 +28,7 @@ public class Messaggio {
     public Messaggio(ResultSet rs){
         try {
             while(rs.next()){
-                id = rs.getString("IDMESSAGGIO");
+                id = rs.getInt("IDMESSAGGIO");
                 testo = rs.getString("TESTOMSG");
                 testoCifrato = rs.getString("TESTOCIFRATO");
                 lingua = rs.getString("LINGUAMSG");

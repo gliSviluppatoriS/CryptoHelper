@@ -14,7 +14,7 @@ import java.util.Vector;
  * @author lorenzo
  */
 public class SistemaCifratura {
-    private String id;
+    private int id;
     private String chiave;
     private String metodo;
     private UserInfo creatore;
@@ -28,7 +28,7 @@ public class SistemaCifratura {
     public SistemaCifratura(ResultSet rs){
         try{
             while(rs.next()){
-                id = rs.getString("IDCIFRATURA");
+                id = rs.getInt("IDCIFRATURA");
                 chiave = rs.getString("CHIAVE");
                 metodo = rs.getString("METODO");
             }

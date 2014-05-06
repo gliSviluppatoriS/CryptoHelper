@@ -11,21 +11,21 @@ package cryptohelper;
  * @author lorenzo
  */
 public class UserInfo {
-    private String id;
+    private int id;
     private String nome;
     private String cognome;
 
-    public UserInfo(String id, String nome, String cognome) {
+    public UserInfo(int id, String nome, String cognome) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

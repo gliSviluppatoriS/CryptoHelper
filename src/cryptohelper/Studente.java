@@ -11,13 +11,13 @@ package cryptohelper;
  * @author lorenzo
  */
 public class Studente {
-    private String id;
+    private int id;
     private String nome;
     private String cognome;
     private String login;
     private String pwd;
 
-    public Studente(String id, String nome, String cognome, String login, String pwd) {
+    public Studente(int id, String nome, String cognome, String login, String pwd) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -25,11 +25,11 @@ public class Studente {
         this.pwd = pwd;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
