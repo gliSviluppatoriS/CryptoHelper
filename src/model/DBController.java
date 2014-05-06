@@ -105,4 +105,11 @@ public class DBController {
         System.out.println("Table STUDENTE creata.");
  
     }
+    
+    public static void main(String[] args) {    
+       
+        try { // creazione tabella UTENTI in DB
+            creaTabellaStudente();
+        } catch (SQLException e) {System.out.println(e.getMessage());}
+    }
 }
