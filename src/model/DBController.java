@@ -30,9 +30,10 @@ public class DBController {
             Connection conn = DriverManager.getConnection( DBurl,  DBuser,  DBpwd);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM STUDENTE WHERE LOGIN ='"+user+"' AND PWD ='"+pwd+"'");
-            String id, username, pass, nome, cognome;
+            int id;
+            String username, pass, nome, cognome;
             while(rs.next()){
-                id = rs.getString("ID");
+                id = rs.getInt("ID");
                 username = rs.getString("LOGIN");
                 pass = rs.getString("PWD");
                 nome = rs.getString("NOME");
@@ -56,11 +57,12 @@ public class DBController {
             System.out.println(dati);
             st.executeUpdate("INSERT INTO STUDENTE (LOGIN,PWD,NOME,COGNOME) VALUES "+ dati);
             ResultSet rs = st.executeQuery("SELECT ID FROM STUDENTE WHERE LOGIN ='"+user+"'");
+            rs.next();
             int id_stud=rs.getInt("ID");
             st.close();
             conn.close();
             System.out.println("Ho caricato: " + dati);
-            student = new Studente(id_stud+"", nome, cognome, user, pwd);
+            student = new Studente(id_stud, nome, cognome, user, pwd);
         }catch(SQLException e){out.println(e);}
         return student;
     }

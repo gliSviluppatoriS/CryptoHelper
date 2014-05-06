@@ -17,3 +17,5 @@ nbproject/private/private.properties
 *.properties
 
 *.xml
+
+*.class
