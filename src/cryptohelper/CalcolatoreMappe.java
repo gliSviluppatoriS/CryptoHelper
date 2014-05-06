@@ -10,9 +10,11 @@ package cryptohelper;
  *
  * @author lorenzo
  */
-public interface CalcolatoreMappe {
+public abstract class CalcolatoreMappe {
     
-    public CalcolatoreMappe create(String metodo);//da modello di progetto dovrebbe essere static ma i metodi static non possono stare in un interface 
+    public  static  CalcolatoreMappe create(String metodo){
+        return null;
+}
     
-    public Mappatura calcola(String chiave);
+    public abstract Mappatura calcola(String chiave);
 }

@@ -10,10 +10,9 @@ package cryptohelper;
  *
  * @author lorenzo
  */
-public class CalcolatoreParolachiave implements CalcolatoreMappe{
+public class CalcolatoreParolachiave extends CalcolatoreMappe{
     
-    @Override
-    public CalcolatoreMappe create(String metodo){//da modello di progetto dovrebbe essere static ma i metodi static non possono stare in un interface 
+    public static CalcolatoreMappe create(String metodo){//da modello di progetto dovrebbe essere static ma i metodi static non possono stare in un interface 
         return null;
     }
     @Override
