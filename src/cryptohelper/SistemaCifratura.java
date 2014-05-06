@@ -36,6 +36,7 @@ public class SistemaCifratura {
     }
     
     public static Vector<SistemaCifratura> caricaSistemiCifratura(UserInfo stud){
+        return null;
         
     }
     

@@ -39,27 +39,27 @@ public class Messaggio {
     }
     
     public static Messaggio load(String id){
-
+        return null;
     }
     
     public static Vector<Messaggio> caricaInviati(UserInfo mittente){
-        
+        return null;
     }
     
     public static Vector<Messaggio> caricaBozze(UserInfo mittente){
-        
+        return null;
     }
     
     public static Vector<Messaggio> caricaRicevuti(UserInfo destinatario){
-        
+        return null;
     }
     
     public boolean elimina(){
-        
+        return false;
     }
     
     public boolean salva(){
-        
+        return false;
     }
     
     public void cifra(){
