@@ -12,6 +12,7 @@ import java.sql.ResultSet;
  *
  * @author lorenzo
  */
+
 public class Proposta {
     private String stato;
     private UserInfo proponente;
