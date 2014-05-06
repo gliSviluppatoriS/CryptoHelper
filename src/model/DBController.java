@@ -82,4 +82,27 @@ public class DBController {
         }catch(SQLException e){out.println(e);}
         return student;
     }
+    
+    public static void creaTabellaStudente() throws SQLException { //Se non catturo eccezione devo fare throw
+        Connection conn = DriverManager.getConnection(DBurl,  DBuser,  DBpwd);
+        Statement st = conn.createStatement();
+        try {
+            st.execute("DROP TABLE STUDENTE"); //Rimuovo da DB la tabella se esiste già
+        } catch (SQLException e){
+            System.out.println(e.getMessage() + ": no problem");
+        }
+        st.executeUpdate("CREATE TABLE STUDENTE" +  //creo la tabella
+                "(ID VARCHAR(30) NOT NULL, " +
+                "LOGIN VARCHAR(30) NOT NULL, " + 
+                "PWD VARCHAR(30) NOT NULL, "  +
+                "NOME VARCHAR(30) NOT NULL, "  +
+                "COGNOME VARCHAR(30) NOT NULL, "  +
+                "PRIMARY KEY(ID,LOGIN), "
+                );
+        
+        st.close();//chiudo statement (non serve più)
+        conn.close(); //chiusura connessione
+        System.out.println("Table STUDENTE creata.");
+ 
+    }
 }
