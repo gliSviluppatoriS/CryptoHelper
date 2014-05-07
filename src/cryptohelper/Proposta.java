@@ -29,7 +29,7 @@ public class Proposta {
         stato = null;
     }
     
-    public static Proposta caricaAttiva(String idProp, String idPart){
+    public static Proposta caricaAttiva(int idProp, int idPart){
         return null;
     }
     

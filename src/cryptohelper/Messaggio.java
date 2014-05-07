@@ -38,7 +38,7 @@ public class Messaggio {
         }catch(SQLException e){System.out.println(e);}
     }
     
-    public static Messaggio load(String id){
+    public static Messaggio load(int id){
         return null;
     }
     
