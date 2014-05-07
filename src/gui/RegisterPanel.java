@@ -124,7 +124,7 @@ public class RegisterPanel extends JPanel{
                     registerInfoLabel.setText("ERRORE, Username o PassWord errati");
                         else{
                             contentPanel.remove(registerPanel);
-                            new HomePanel(contentPanel, st);
+                            new NavPanel(contentPanel, st);
                         }
             }
         }

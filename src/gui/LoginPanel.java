@@ -96,7 +96,7 @@ public class LoginPanel extends JPanel {
                             loginInfoLabel.setText("ERRORE, Username o PassWord errati");
                         else{
                             contentPanel.remove(loginPanel);
-                            new HomePanel(contentPanel, st);
+                            new NavPanel(contentPanel, st);
                         }
                     }
             }

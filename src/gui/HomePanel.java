@@ -29,7 +29,6 @@ public class HomePanel {
         homePanel = new JPanel();
         
         contentPanel.add(welcomeLabel, BorderLayout.NORTH);
-        new NavPanel(contentPanel);
         contentPanel.add(homePanel, BorderLayout.CENTER);
         contentPanel.validate();
     }
