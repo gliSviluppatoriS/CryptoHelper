@@ -9,6 +9,8 @@ package gui;
 import cryptohelper.Studente;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,10 +61,43 @@ public class NavPanel {
         navPanel.add(navControllaPostaPanel);
         navPanel.add(navEsciPanel);
         
+        navCreaCifraturaButton.addActionListener((ActionListener) new NavAction(contentPanel, st));
+        navInviaButton.addActionListener((ActionListener) new NavAction(contentPanel, st));
+        navControllaPostaButton.addActionListener((ActionListener) new NavAction(contentPanel, st));
+        navEsciButton.addActionListener((ActionListener) new NavAction(contentPanel, st));
+        
         contentPanel.add(navPanel, BorderLayout.CENTER);
         contentPanel.validate();
     }
     
-    
+    public class NavAction implements ActionListener{
+        
+        private JPanel contentPanel;
+        private Studente stud;
+        
+        public NavAction(JPanel cp, Studente st){
+            contentPanel = cp;
+            stud = st;
+            
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            if (command.equals("Crea sistema di Cifratura")){
+                contentPanel.remove(navPanel);
+                new CreaSistemaCifraturaPanel(contentPanel, stud);
+            }
+            else if(command.equals("Invia msg")){
+                
+            }
+            else if(command.equals("Controlla Posta")){
+                
+            }
+            else if(command.equals("LogOut")){
+                
+            }
+        }
+        
+    }  
     
 }
