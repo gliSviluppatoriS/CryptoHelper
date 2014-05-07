@@ -140,10 +140,10 @@ public class DBController {
         st.executeUpdate("CREATE TABLE MESSAGGIO" +  //creo la tabella
                 "(IDMESSAGGIO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY, " +
                 "TESTOMSG VARCHAR(500) NOT NULL, " + 
-                "TESTOCIFRATO VARCHAR(500) NOT NULL, "  +
+                "TESTOCIFRATO VARCHAR(500), "  +
                 "LINGUAMSG VARCHAR(30) NOT NULL, "  +
                 "TITOLOMSG VARCHAR(50) NOT NULL, "  + 
-                "BOZZAMSG VARCHAR(500) NOT NULL)"
+                "BOZZAMSG VARCHAR(500))"
                 );
         
         st.close();//chiudo statement (non serve più)

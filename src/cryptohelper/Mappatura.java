@@ -14,6 +14,11 @@ public class Mappatura {
     private char[] mappa = new char[26];
     private char[] mappaInversa = new char[26];
 
+    public Mappatura(char[] mapp, char[] inverseMapp){
+        mappa = mapp;
+        mappaInversa = inverseMapp;
+    }
+    
     public char[] getMappa() {
         return mappa;
     }

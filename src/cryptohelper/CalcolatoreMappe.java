@@ -13,7 +13,18 @@ package cryptohelper;
 public abstract class CalcolatoreMappe {
     
     public  static  CalcolatoreMappe create(String metodo){
-        return null;
+        CalcolatoreMappe calcMap;
+        switch(metodo){
+            case  "caesar":
+                calcMap = new CalcolatoreCesare();
+            break;
+            case  "keyWord":
+                calcMap = new CalcolatoreParolachiave();
+            break;
+            default:
+                calcMap = new CalcolatorePseudocasuale();
+        }
+        return calcMap;
     }
     
     public abstract Mappatura calcola(String chiave);
