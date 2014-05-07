@@ -22,13 +22,13 @@ public class CalcolatoreCesare extends CalcolatoreMappe{
     public Mappatura calcola(String chiave){
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         int offset = parseInt(chiave);
-        Mappatura mapp;
+        Mappatura map;
         char[] criptedAlphabet = new char[26];
         
         for(int i = 0; i< 26; i++){
             criptedAlphabet[i] = alphabet[i+offset%26];
         }
-        mapp = new Mappatura(alphabet, criptedAlphabet);
-        return mapp;
+        map = new Mappatura(alphabet, criptedAlphabet);
+        return map;
     }
 }
