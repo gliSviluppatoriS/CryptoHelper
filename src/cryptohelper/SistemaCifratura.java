@@ -19,6 +19,8 @@ public class SistemaCifratura {
     private String metodo;
     private UserInfo creatore;
     private Mappatura map;
+    private Proposta proposta;
+    private CalcolatoreMappe calcMap;
 
     public SistemaCifratura(String chiave, String metodo){
         this.chiave = chiave;
@@ -40,5 +42,22 @@ public class SistemaCifratura {
         
     }
     
+    public static SistemaCifratura load(int id){
+        return null;
+    }
     
+    public void calcolaMappatura(){
+        
+    }
+    
+    public void prova(){
+        
+    }
+    public boolean salva(){
+      return true;  
+    }
+    
+    public boolean elimina(){
+        return true;
+    }
 }
