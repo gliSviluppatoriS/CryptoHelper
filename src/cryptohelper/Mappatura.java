@@ -28,10 +28,18 @@ public class Mappatura {
     }
     
     public char map(char c){
+        for(int i = 0; i < 26; i++){
+            if(c == mappaInversa[i])
+                return mappa[i];
+        }
         return c;
     }
     
     public char inversMap(char c){
+        for(int i = 0; i < 26; i++){
+            if(c == mappa[i])
+                return mappaInversa[i];
+        }
         return c;
     }
 }
